@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+  <title>Attendance Page</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+  <form th:action="@{/logout}" method="get">
+    <button class="btn btn-md btn-danger" name="registration"
+            type="Submit">Logout
+    </button>
+  </form>
+  <a href="/admin/employees" class="btn btn-primary">
+    <i class="fas fa-log-out ml-2"> Login </i></a>
+  <div class="panel-group" style="margin-top:40px">
+    <div class="panel panel-primary">
+      <div class="panel-heading"> Upload Employee Attendance
+      </div>
+      <div class="panel-body">
+        <form autocomplete="off" enctype="multipart/form-data" action="#" th:action="@{/admin/attendance}"
+              th:object="${attendanceData}" method="post" class="form-horizontal" role="form">
+          <input type="file" th:name="file" accept=".xls,.xlsx" /> <input
+            type="submit" value="Upload file" />
+          <label style="display: none">
+            <input type="text" th:name="empName" placeholder="User Name"
+                   class="form-control" th:value="${empName}" hidden/>
+          </label>
+        </form>
+      </div>
+      <p class="admin-message-text text-center" th:utext="${message}"></p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
+

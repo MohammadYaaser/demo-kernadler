@@ -12,13 +12,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "monthly_salary")
+public class MonthlySalaries {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "role_id")
-  private int id;
+  @Column(name = "sal_id")
+  private Integer id;
 
-  @Column(name = "role")
-  private String role;
+  @Column(name = "salary")
+  private Long salary;
+
 }

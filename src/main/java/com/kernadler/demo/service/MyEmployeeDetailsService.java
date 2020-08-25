@@ -18,27 +18,27 @@ import java.util.Set;
 @Service
 public class MyEmployeeDetailsService implements UserDetailsService {
 
-    @Autowired
-    private EmployeeService employeeService;
+  @Autowired
+  private EmployeeService employeeService;
 
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String empName) {
-        Employee employee = employeeService.findEmployeeByName(empName);
-        List<GrantedAuthority> authorities = getEmployeeAuthority(employee.getRoles());
-        return buildEmployeeForAuthentication(employee, authorities);
-    }
+  @Override
+  @Transactional
+  public UserDetails loadUserByUsername(String empName) {
+    Employee employee = employeeService.findEmployeeByName(empName);
+    List<GrantedAuthority> authorities = getEmployeeAuthority(employee.getRoles());
+    return buildEmployeeForAuthentication(employee, authorities);
+  }
 
-    private List<GrantedAuthority> getEmployeeAuthority(Set<Role> empRoles) {
-        Set<GrantedAuthority> roles = new HashSet<>();
-        for (Role role : empRoles) {
-            roles.add(new SimpleGrantedAuthority(role.getRole()));
-        }
-        return new ArrayList<>(roles);
+  private List<GrantedAuthority> getEmployeeAuthority(Set<Role> empRoles) {
+    Set<GrantedAuthority> roles = new HashSet<>();
+    for (Role role : empRoles) {
+      roles.add(new SimpleGrantedAuthority(role.getRole()));
     }
+    return new ArrayList<>(roles);
+  }
 
-    private UserDetails buildEmployeeForAuthentication(Employee employee, List<GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(employee.getEmpName(), employee.getPassword(),
-                employee.getActive(), true, true, true, authorities);
-    }
+  private UserDetails buildEmployeeForAuthentication(Employee employee, List<GrantedAuthority> authorities) {
+    return new org.springframework.security.core.userdetails.User(employee.getEmpName(), employee.getPassword(),
+        employee.getRowState(), true, true, true, authorities);
+  }
 }
