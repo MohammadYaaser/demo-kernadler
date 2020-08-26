@@ -26,7 +26,7 @@ public class AttendanceService {
     this.monthlySalaryRepository = monthlySalaryRepository;
   }
 
-  public Attendance saveAtt(MultipartFile reapExcelDataFile, Employee employee) throws Exception {
+  public Attendance saveAttendance(MultipartFile reapExcelDataFile, Employee employee) throws Exception {
 
     Attendance attendance = new Attendance();
     XSSFWorkbook workbook = new XSSFWorkbook(reapExcelDataFile.getInputStream());

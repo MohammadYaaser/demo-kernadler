@@ -9,7 +9,6 @@ import com.kernadler.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
 public class MainController {
 
   @Autowired
@@ -96,7 +95,7 @@ public class MainController {
               "There is already a Employee registered with the user name provided");
     }
     if (!bindingResult.hasErrors()) {
-      attendance = attendanceService.saveAtt(
+      attendance = attendanceService.saveAttendance(
           file,
           employeeExists
       );
